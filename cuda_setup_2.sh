@@ -52,6 +52,7 @@ sudo ldconfig
 
 # u can copy it to folder in vscode
 
+#i am not sure
 CUDNN_TAR_FILE="cudnn-linux-x86_64-8.4.1.50_cuda11.6-archive.tar.xz"
 tar -xf ${CUDNN_TAR_FILE}
 
