@@ -1,14 +1,14 @@
 sudo apt update
 sudo apt upgrade
 
-
-
 # get nvidia driver
 
 sudo add-apt-repository ppa:graphics-drivers
 sudo apt update
 # to check for driver version needed see
-# ubuntu-drivers devices
+ubuntu-drivers devices
+
+# for the machine it was
 sudo apt install nvidia-driver-515
 
 sudo reboot
@@ -31,7 +31,11 @@ echo 'export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}' >> ~/.bashrc
 
 nvcc --version
 
-# 
+# install pytorch and transformers
+
+#next time use venev
 
 sudo apt install python3-pip
 pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
+
+pip3 install transformers
