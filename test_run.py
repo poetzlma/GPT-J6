@@ -6,9 +6,10 @@ import transformers
 
 #Will need at least 13-14GB of Vram for CUDA
 if torch.cuda.is_available():
-    model =  GPTJForCausalLM.from_pretrained("EleutherAI/gpt-j-6B", torch_dtype=torch.float16).cuda()
+    model =  GPTJForCausalLM.from_pretrained("EleutherAI/gpt-j-6B",cache_dir="/mnt2/cache_dir/", torch_dtype=torch.float16).cuda()
 else:
-    model =  GPTJForCausalLM.from_pretrained("EleutherAI/gpt-j-6B", torch_dtype=torch.float16)
+    print("shit")
+    #model =  GPTJForCausalLM.from_pretrained("EleutherAI/gpt-j-6B", torch_dtype=torch.float16)
 
 from transformers import AutoTokenizer
 tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-j-6B")
