@@ -7,7 +7,7 @@ with st.form("my_form"):
     st.header("SQL Query From Description")
     st.write("The following will show how to generate a sql query from your prompt")
 
-    st.write("---- Some Examples are: ----")
+    st.caption("---- Some Examples are: ----")
 
     st.write("Show all companies along with the number of employees in each department.")
     st.code("SELECT COMPANY, COUNT(COMPANY) FROM Employee GROUP BY COMPANY;", language="SQL")
