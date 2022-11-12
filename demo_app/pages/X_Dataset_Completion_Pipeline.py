@@ -88,7 +88,7 @@ if file:
                     answer = json.loads(data)['result'].split("###")[len(full_columns.index)] 
 
                     update = empty_columns[' comment'] == row[' comment']
-                    empty_columns.loc[update, ' score'] = answer.split("[Score]: ")[1]
+                    empty_columns.loc[update, ' score'] = answer.split("[Score]: ")[1].split("[: ")[0]
 
                     counter_current = counter_current + 1
 
