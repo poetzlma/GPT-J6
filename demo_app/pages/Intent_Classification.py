@@ -39,7 +39,7 @@ with st.form("my_form"):
                 #connect both strings
                 url = 'http://127.0.0.1:5002/generate'
 
-                payload ="{'body': '" + str(request) + "', 'token': '10'}"
+                payload ="{'body': '" + str(request) + "', 'token': '2'}"
                 payload = payload.replace("'", '"')
                 
                 r = requests.get(url, json=payload)                

@@ -3,6 +3,7 @@ import requests
 import json
 import streamlit as st
 import pandas as pd
+import numpy as np
 
 
 st.title("Dataset Completion - Scoring")
@@ -62,7 +63,12 @@ if file:
 
                     few_shot = few_shot + "[Comment]: " + row[' comment'] + " [Score]: " + str(row[' score']) + " ###"
 
-               #st.write(few_shot)                            
+               #st.write(few_shot)
+
+               #count rows for progess bar
+               counter_current = 0
+               counter = len(empty_columns.index)
+               my_bar = st.progress(0)                  
 
                for index, row in empty_columns.iterrows():
 
@@ -71,7 +77,7 @@ if file:
                     #connect both strings
                     url = 'http://127.0.0.1:5002/generate'
 
-                    payload ="{'body': '" + str(text_val) + "', 'token': '15'}"
+                    payload ="{'body': '" + str(text_val) + "', 'token': '1'}"
                     payload = payload.replace("'", '"')
 
                     # st.write(payload)
@@ -84,13 +90,21 @@ if file:
                     update = empty_columns[' comment'] == row[' comment']
                     empty_columns.loc[update, ' score'] = answer.split("[Score]: ")[1]
 
-                    st.write(answer)
+                    counter_current = counter_current + 1
+
+                    my_bar.progress(counter_current / counter)
+                    #st.write(answer)
 
                st.header("Download the completed Dataset")
-               
+
                combined = pd.concat([full_columns, empty_columns])
 
-               st.dataframe(combined)
+               # colour the missing values
+               len_full = len(full_columns.index) - 1
+               def highlight_everyother(s):
+                    return ['background-color: lightgrey; color:black' if x > len_full else ''
+                              for x in range(len(s))]
+               st.dataframe(combined.style.apply(highlight_everyother))
 
                @st.experimental_memo
                def convert_df(combined):
@@ -99,7 +113,7 @@ if file:
                csv = convert_df(combined)
 
                st.download_button(
-               "Press to Download filled CSV",
+               "Download filled CSV",
                csv,
                "filled_file.csv",
                "text/csv",
